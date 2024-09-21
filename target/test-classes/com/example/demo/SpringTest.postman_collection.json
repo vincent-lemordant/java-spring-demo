@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "740b4739-9e95-40e4-ae90-771db4a25a92",
+		"name": "SpringTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "432773"
+	},
+	"item": [
+		{
+			"name": "PostFilm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function(){",
+							"\tpm.response.to.have.status(201)",
+							"});",
+							"",
+							"pm.test(\"Response type is JSON\", function(){",
+							"\tpm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Check response properties\", function(){",
+							"   let jsonData = pm.response.json()",
+							"   pm.expect(jsonData.id).to.be.above(0);",
+							"   pm.expect(jsonData.titre).to.eq(\"Star Wars: The Empire Strikes Back\");",
+							"   pm.expect(jsonData.description).to.eq(\"Darth Vader is adamant about turning Luke Skywalker to the dark side.\");",
+							"",
+							"   pm.expect(jsonData.acteurs).to.be.an('array').that.is.not.empty;",
+							"",
+							"   let acteur1 = jsonData.acteurs[0];",
+							"   pm.expect(acteur1.id).to.be.above(0);",
+							"   pm.expect(acteur1.nom).to.be.eq(\"Ford\");",
+							"   pm.expect(acteur1.prenom).to.be.eq(\"Harrison\");",
+							"",
+							"   let acteur2 = jsonData.acteurs[1];",
+							"   pm.expect(acteur2.id).to.be.above(0);",
+							"   pm.expect(acteur2.nom).to.be.eq(\"Hamill\");",
+							"   pm.expect(acteur2.prenom).to.be.eq(\"Mark\");",
+							"});",
+							"",
+							"pm.test(\"Response time above 300 milliseconds\", function () {",
+							"\tpm.expect(pm.response.responseTime).to.be.below(300)",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"titre\":\"Star Wars: The Empire Strikes Back\",\n   \"description\":\"Darth Vader is adamant about turning Luke Skywalker to the dark side.\",\n   \"acteurs\":[\n      {\n         \"nom\":\"Ford\",\n         \"prenom\":\"Harrison\"\n      },\n      {\n         \"nom\":\"Hamill\",\n         \"prenom\":\"Mark\"\n      }\n   ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/films",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"films"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetFilm",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function(){",
+							"\tpm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test(\"Response type is JSON\", function(){",
+							"\tpm.response.to.be.json;",
+							"});",
+							"",
+							"pm.test(\"Check response properties\", function(){",
+							"   let jsonData = pm.response.json()",
+							"   pm.expect(jsonData.id).to.be.above(0);",
+							"   pm.expect(jsonData.titre).to.eq(\"Star Wars: The Empire Strikes Back\");",
+							"   pm.expect(jsonData.description).to.eq(\"Darth Vader is adamant about turning Luke Skywalker to the dark side.\");",
+							"",
+							"   pm.expect(jsonData.acteurs).to.be.an('array').that.is.not.empty;",
+							"",
+							"   let acteur1 = jsonData.acteurs[0];",
+							"   pm.expect(acteur1.id).to.be.above(0);",
+							"   pm.expect(acteur1.nom).to.be.eq(\"Ford\");",
+							"   pm.expect(acteur1.prenom).to.be.eq(\"Harrison\");",
+							"",
+							"   let acteur2 = jsonData.acteurs[1];",
+							"   pm.expect(acteur2.id).to.be.above(0);",
+							"   pm.expect(acteur2.nom).to.be.eq(\"Hamill\");",
+							"   pm.expect(acteur2.prenom).to.be.eq(\"Mark\");",
+							"});",
+							"",
+							"pm.test(\"Response time above 300 milliseconds\", function () {",
+							"\tpm.expect(pm.response.responseTime).to.be.below(300)",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/films/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"films",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
