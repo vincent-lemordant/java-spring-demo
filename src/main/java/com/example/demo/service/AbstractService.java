@@ -9,14 +9,16 @@ import com.example.demo.model.AbstractEntity;
 import com.example.demo.repository.AbstractRepository;
 
 @Service
+// AbstractService is a generic abstract class designed to handle common
+// business logic operations for entities extending AbstractEntity.
 public abstract class AbstractService<T extends AbstractEntity> {
 
     @Autowired
     private AbstractRepository<T> repository;
 
-    public T save(T acteur)
+    public T save(T entity)
     {
-        return repository.save(acteur);
+        return repository.save(entity);
     }
     
     public Optional<T> getById(Long id)

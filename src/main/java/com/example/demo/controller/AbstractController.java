@@ -15,6 +15,8 @@ import com.example.demo.model.AbstractEntity;
 import com.example.demo.service.AbstractService;
 
 @RestController
+// AbstractController is a generic abstract class designed to handle common API
+// operations for entities extending AbstractEntity and their corresponding DTO types.
 public abstract class AbstractController<T extends AbstractEntity, TDto> {
 
     @Autowired
@@ -24,13 +26,13 @@ public abstract class AbstractController<T extends AbstractEntity, TDto> {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TDto saveFilm(@RequestBody TDto film)
+    public TDto save(@RequestBody TDto dto)
     {
-        return mapper.toDto(service.save(mapper.toEntity(film)));
+        return mapper.toDto(service.save(mapper.toEntity(dto)));
     }
 
     @GetMapping("/{id}")
-    public TDto fetchFilmList(@PathVariable("id") Long id)
+    public TDto fetchList(@PathVariable("id") Long id)
     {
         return mapper.toDto(service.getById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
