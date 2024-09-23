@@ -12,6 +12,8 @@ For building and running the application you need:
 
 ## Setup
 
+This project has been generated via [Initializr](https://start.spring.io/).
+
 Build :
 
 ```shell
